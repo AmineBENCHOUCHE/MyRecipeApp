@@ -1,0 +1,26 @@
+//NOTES from tutorial https://www.youtube.com/watch?v=5wwaQ4GiSNU&t=6s
+
+SpoonacularAPI (API key) => Backend
+React Frontend =>  API search => Node Backend  => SAve/delete Postgres Datatabase
+                   API FAVORITES
+THe APi key is store on the backend use apikey to communicate withe Api and rturn the result to the frontend
+
+
+//Create Backend
+create folder backend
+    npm init 
+        entry point =>  ./src/index.ts  
+    //Package 
+    cors => security allow to make request froma different port
+    npm i express prisma @prisma/client cors
+    //Nodemon hot reloading
+    npm i ts-node typescript nodemon @types/cor @types/express @types/node --save-dev
+    create folder src
+        // file where we will manage the endpoints
+        index.ts 
+
+
+//Create Frontend
+
+
+//Database
