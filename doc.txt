@@ -19,8 +19,12 @@ create folder backend
         // file where we will manage the endpoints
         index.ts 
 
+//Database
+    elephantsql
+    create .env file and add the url created on elephantsql
+    Prisma will connect to the database for us
+    => npx prisma init
 
 //Create Frontend
 
 
-//Database
