@@ -15,8 +15,9 @@ create folder backend
     npm i express prisma @prisma/client cors
     //Nodemon hot reloading
     npm i ts-node typescript nodemon @types/cor @types/express @types/node --save-dev
-    create folder src
-        // file where we will manage the endpoints
+    // let note read environment file
+    npm i dotenv 
+    create folder src 
         index.ts 
 
 //Database
@@ -24,7 +25,11 @@ create folder backend
     create .env file and add the url created on elephantsql
     Prisma will connect to the database for us
     => npx prisma init
+    spoonnacular to retrieve the api key
+    thunderclient to test the apikey 
+
 
 //Create Frontend
+    npm create vite@latest
 
 
