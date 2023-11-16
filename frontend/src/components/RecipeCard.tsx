@@ -5,12 +5,16 @@ import { FaRegHeart } from "react-icons/fa";
 
 
 interface Props {
-    recipe: Recipe
+    recipe: Recipe, 
+    onClick: () => void
+
 }
 
-const RecipeCard = ({recipe}: Props) => {
+const RecipeCard = ({recipe, onClick}: Props) => {
   return (
-    <div className="flex flex-col items-start p-2 shadow-md">
+    <div className="flex flex-col items-start p-2 shadow-md"
+    onClick={onClick}
+    >
         <img src={recipe.image} alt="recipe image" className="w-full" />
         <div className="flex gap-2 items-center py-4">
             <FaRegHeart/>

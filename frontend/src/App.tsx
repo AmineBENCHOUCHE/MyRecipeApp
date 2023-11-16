@@ -4,12 +4,15 @@ import * as api from './api'
 import { Recipe } from './types'
 import RecipeCard from './components/RecipeCard'
 import { IoSearch } from "react-icons/io5";
+import RecipeModal from './components/RecipeModal'
 
 
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(undefined)
+
   const pageNumber = useRef<number>(1)
 
   const handleOnChange = (e:  ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +33,8 @@ const App = () => {
     }
   }
 
+
+
   const handleViewMore = async () => {
     const nextPage = pageNumber.current+1
     try {
@@ -43,9 +48,11 @@ const App = () => {
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    //TODO Disable scrolling when Modal
+    <div className={`w-full flex flex-col items-center justify-center h-full ${selectedRecipe ? 'overflow-hidden' : ''}`}>
+      <h1 className='text-4xl font-extrabold p-10'>RECIPE APP</h1>
       <form 
-        className='w-full flex items-center h-full border border-1 border-gray-200'
+        className='w-full flex items-center h-full border border-1 border-gray-200 mb-5'
         onSubmit={(event) => handleSearchSubmit(event)}>
         <input 
           className='w-full p-2 '
@@ -62,16 +69,19 @@ const App = () => {
         {recipes.map(recipe => 
           (<div 
           className=''
+    
           key={recipe.id}>
-          <RecipeCard recipe={recipe}/>
+          <RecipeCard recipe={recipe} onClick={() => setSelectedRecipe(recipe)}/>
           </div>))
           }
 
       </div>
-          <button
-          onClick={handleViewMore}
-          >View more</button>
-
+          <button onClick={handleViewMore}>View more</button>
+        {selectedRecipe && 
+        <RecipeModal 
+          recipeId={(selectedRecipe.id.toString())} 
+          onClose={() => setSelectedRecipe(undefined)} 
+        />}
     </div>
   )
   
