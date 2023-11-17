@@ -37,7 +37,7 @@ const RecipeModal = ({recipeId, onClose}: Props) => {
                 </div>
                 <div className="py-5 ">
                     <h3 className="text-left pb-2 font-bold">Summary</h3>
-                    <div className="mb-5 py-2 border-red-600 border-2 overflow-hidden">
+                    <div className="mb-5 py-2 overflow-hidden">
                         <p
                         className="text-left text-sm md:text-lg h-full overflow-auto"
                         dangerouslySetInnerHTML={{__html: recipeSummary?.summary}}>
