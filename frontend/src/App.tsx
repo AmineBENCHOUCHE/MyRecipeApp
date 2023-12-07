@@ -6,6 +6,8 @@ import RecipeCard from './components/RecipeCard'
 import RecipeModal from './components/RecipeModal'
 import TabsComponent from './components/TabsComponent'
 import SearchComponent from './components/SearchComponent'
+import Skeleton from './components/Skeleton'
+import Header from './components/Header'
 
 type Tabs = "search" | "favourites"
 const App = () => {
@@ -83,14 +85,8 @@ const App = () => {
   return (
     //TODO  Create Skeleton when fetching data
     //TODO Disable scrolling when Modal
-    <div className={`w-full flex flex-col gap-2 items-center justify-center h-full ${selectedRecipe ? 'overflow-hidden' : ''}`}>
-      <div className='relative mb-10 w-full'>
-        <img 
-        className='opacity-50  w-full  h-[500px] object-cover object-center rounded-lg '
-        src="/recipe.png" alt="recipe" />
-        <h1 className='text-6xl font-extrabold absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] bg-black/80 text-white py-2 px-4'>RECIPE APP</h1>
-      </div>
-
+    <div className={`w-full  max-w-[1280px] flex flex-col gap-2 items-center justify-center h-full ${selectedRecipe ? 'overflow-hidden' : ''}`}>
+      <Header/>
       <TabsComponent selectTab={(selectedTab) => setSelectedTab(selectedTab)}/>
       {
         selectedTab==="search"? (
@@ -101,22 +97,28 @@ const App = () => {
               onChange={(e) =>handleOnChange(e) }
               onSubmitForm={(e) => handleSearchSubmit(e)}
             />
+              <div className='grid grid-cols-3 gap-10'>
+                <Skeleton times={6} className='w-[400px] h-40 !flex justify-between items-center' />
+              </div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10'>
-              {recipes?.map((recipe) => 
-                {
-                  const isFavourite = favouriteRecipes.some((favRecipe)=>  recipe.id === favRecipe.id)
-                  
-                  return (<div
-                    key={recipe.id}>
-                    <RecipeCard
-                      recipe={recipe} 
-                      onClick={() => setSelectedRecipe(recipe)}
-                      onFavouriteButtonClick={isFavourite? removeFavouriteRecipe: addFavouriteRecipe} 
-                      isFavourite= {isFavourite}
-                    />
-                  </div>)
-                })
-              }
+             
+                
+                {recipes?.map((recipe) => 
+                  {
+                    const isFavourite = favouriteRecipes.some((favRecipe)=>  recipe.id === favRecipe.id)
+                    
+                    return (<div
+                      key={recipe.id}>
+                      <RecipeCard
+                        recipe={recipe} 
+                        onClick={() => setSelectedRecipe(recipe)}
+                        onFavouriteButtonClick={isFavourite? removeFavouriteRecipe: addFavouriteRecipe} 
+                        isFavourite= {isFavourite}
+                      />
+                    </div>)
+                  })
+                }
+              
 
             </div>
               {/* // Show the button View More */}

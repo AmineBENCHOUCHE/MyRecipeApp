@@ -68,3 +68,26 @@ export const getFavouriteRecipesByIDs = async (ids: String[]) => {
     return {results: json}
 
 }
+
+// SEARCH RECIPE BY INGREDIENTS
+
+export const getRecipesByIngredients = async(ingredients: String[] /*, number:number ,ranking: number, ignorePantry:boolean*/) => {
+    if(!apiKey){
+        throw new Error('API KEY not found ')
+    }
+
+    const url = new URL( "https://api.spoonacular.com/recipes/findByIngredients")
+    const params = {
+        apiKey,
+        ingredients: ingredients.join(','),
+        //number: "10",
+        // ranking: "1", //Whether to maximize used ingredients (1) or minimize missing ingredients (2) first.
+        // ignorePantry: "true" //Whether to ignore typical pantry items, such as water, salt, flour, etc.
+    }
+
+    url.search = new URLSearchParams(params).toString()
+    const response = await fetch(url)
+    const json = await response.json()
+
+    return {results:json}
+}

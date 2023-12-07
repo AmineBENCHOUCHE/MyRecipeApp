@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import {PrismaClient} from '@prisma/client'
 import * as RecipeAPI from "./recipe-api"
+import { log } from 'console'
 
 
 const app = express()
@@ -81,6 +82,21 @@ app.delete('/api/recipes/favourite', async(req, res) =>{
         
         return res.status(500).json({error:"Oops, something went wrong"})
     }
+})
+
+
+app.get('/api/recipes/searchByIngredients', async(req, res)=> {
+    console.log(req);
+    
+    const ingredients = (req.query.ingredients as string[])
+    // const page = parseInt(req.query.number as string)
+    // const  ranking = "1"
+    // const ignorePantry = "true"
+
+
+    const recipesbyIngredients = RecipeAPI.getRecipesByIngredients(ingredients)
+    return res.status(200).json(recipesbyIngredients)
+
 })
 
 app.listen(5000, () =>{
